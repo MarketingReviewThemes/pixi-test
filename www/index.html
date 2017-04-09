@@ -8,9 +8,26 @@
     <body>
 
         <div id="stat-box">
-            <input type="text" class="squar">
+            <label>Quantity</label>
+            <span class="counterValue"></span>
+            <label>Square</label>
+            <span class="squareValue"></span>
         </div>
+
         <canvas id="scene-box"></canvas>
+
+        <div id="quantity">
+            <label>Quantity per second: </label>
+            <button type="button" class="minusQuantity"><</button>
+            <button type="button" class="plusQuantity">></button>
+            <span id="quantityValue"></span>
+        </div>
+        <div id="gravity">
+            <label>Gravity: </label>
+            <button type="button" class="minusGravity"><</button>
+            <button type="button" class="plusGravity">></button>
+            <span id="gravityValue"></span>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
         <!--<script src="node_modules/todomvc-common/base.js"></script>-->
         <script src="js/helpers.js"></script>
