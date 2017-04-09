@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-framework="javascript">
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--<section class="todoapp">-->
+            <!--<header class="header">-->
+                <!--<h1>todos</h1>-->
+                <!--<input class="new-todo" placeholder="What needs to be done?" autofocus>-->
+            <!--</header>-->
+            <!--<section class="main">-->
+                <!--<input class="toggle-all" type="checkbox">-->
+                <!--<label for="toggle-all">Mark all as complete</label>-->
+                <!--<ul class="todo-list"></ul>-->
+            <!--</section>-->
+            <!--<footer class="footer">-->
+                <!--<span class="todo-count"></span>-->
+                <!--<ul class="filters">-->
+                    <!--<li>-->
+                        <!--<a href="#/" class="selected">All</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="#/active">Active</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="#/completed">Completed</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<button class="clear-completed">Clear completed</button>-->
+            <!--</footer>-->
+        <!--</section>-->
+        <div id="stat-box">
+            <input type="text" class="squar">
+        </div>
+        <canvas id="scene-box"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
+        <!--<script src="node_modules/todomvc-common/base.js"></script>-->
+        <script src="js/helpers.js"></script>
+        <script src="js/store.js"></script>
+        <script src="js/model.js"></script>
+        <script src="js/template.js"></script>
+        <script src="js/view.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/app.js"></script>
+    <script>
+        PIXI.interaction.InteractionManager.prototype.dispatchEvent = function (displayObject, eventString, eventData)
+        {
+            eventData.target = displayObject;
+            eventData.type = eventString;
+
+            var bubbleTarget = displayObject;
+            while (bubbleTarget && !eventData.stopped)
+            {
+                bubbleTarget.emit(eventString, eventData);
+                if (bubbleTarget[eventString])
+                {
+                    bubbleTarget[eventString](eventData);
+                }
+                bubbleTarget = bubbleTarget.parent;
+            }
+        };
+//        PIXI.interaction.InteractionManager.prototype.dispatchEvent();
+    </script>
+    </body>
+</html>
