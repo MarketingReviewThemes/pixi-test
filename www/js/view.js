@@ -8,9 +8,9 @@
     function View() {
         this.getAppView();
 
-        // setInterval(() => {
-        //     this.addFigure();
-        // }, 2000);
+        setInterval(() => {
+            this.addFigure();
+        }, 1000);
 
 
         // this.pixiApp.ticker.add((delta) => {
@@ -38,17 +38,14 @@
                 e.stopPropagation();
             } else {
                 console.log("container clicked");
-                this.addFigure(e.clientX, e.clientY);
+                this.addFigure(e.data.originalEvent.clientX, e.data.originalEvent.clientY);
             }
         });
-
-
 
 
         //Rectangle for make container bigger
         var rectangle = new PIXI.Graphics();
         rectangle.beginFill(0xFFFFFF);
-        rectangle.lineStyle(4, 0xffd900, 1);
         rectangle.drawRect(0, 0, 800, 800);
 
         this.container.addChild(rectangle);
