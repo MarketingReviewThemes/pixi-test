@@ -1,149 +1,24 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" data-framework="javascript">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.11/pixi.min.js"></script>
-    <script>PIXI.utils._saidHello = true;</script>
-    <title>Event bubbling example</title>
-    <style>
-        .child {
-            position: absolute;
-        }
-
-        .green {
-            background-color: green;
-        }
-
-        .yellow {
-            background-color: yellow;
-        }
-
-        .red {
-            background-color: red;
-        }
-
-        .large {
-            width: 100px;
-            height: 100px;
-        }
-
-        .medium {
-            width: 50px;
-            height: 50px;
-        }
-
-        .small {
-            width: 25px;
-            height: 25px;
-        }
-    </style>
+    <title>2 Test</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<h2>Event bubbling example</h2>
 
-<!-- HTML -->
-<h4>HTML</h4>
-<div id="container" class="large">
-    <div id="green" class="child large green"></div>
-    <div id="yellow" class="child medium yellow"></div>
-    <div id="red" class="child small red"></div>
+<div id="stat-box">
+    <input type="text" class="squar">
 </div>
-
-<!-- Pixi -->
-<h4>Pixi Canvas</h4>
-<canvas id="pixi"></canvas>
-
-<script>
-
-
-    var onContainerClick = function (e) {
-        console.log('container fired for ' + e.target.id + '.');
-    };
-
-    var onChildClick = function (e) {
-        console.log(e.target.id + ' fired.');
-    };
-
-    /**
-     / HTML setup
-     **/
-
-// Container listens
-    document
-        .getElementById('container')
-        .addEventListener('click', onContainerClick);
-
-    // Children listen
-    [].forEach.call(document.querySelectorAll('.child'), function (el) {
-        el.addEventListener('click', onChildClick);
-    });
-
-    /**
-     / Pixi setup
-     **/
-
-// First, patch InteractionManager
-// (Same code as in my pull request)
-    PIXI.interaction.InteractionManager.prototype.dispatchEvent = function (displayObject, eventString, eventData)
-    {
-        eventData.target = displayObject;
-        eventData.type = eventString;
-
-        var bubbleTarget = displayObject;
-        while (bubbleTarget && !eventData.stopped)
-        {
-            bubbleTarget.emit(eventString, eventData);
-            if (bubbleTarget[eventString])
-            {
-                bubbleTarget[eventString](eventData);
-            }
-            bubbleTarget = bubbleTarget.parent;
-        }
-    };
-
-    // Next let's build scene
-    var renderer = PIXI.autoDetectRenderer(100, 100, {
-        view: document.getElementById('pixi')
-    });
-
-    // Create a container
-    var container = new PIXI.Container();
-    container.id = 'container';
-    // container.interactive = true;
-    container.on('click', onContainerClick);
-
-    // Generate some textures (mimicking the css)
-    var textureSpecs = {
-        green: ['0x008000', [0,0,100,100]],
-        yellow: ['0xFFFF00', [0,0,50,50]],
-        red: ['0xFF0000', [0,0,25,25]]
-    };
-
-    var color;
-    var textures = {};
-    for (color in textureSpecs) {
-        var spec = textureSpecs[color];
-        var graphic = new PIXI.Graphics();
-        graphic.beginFill(spec[0]);
-        graphic.drawRect.apply(graphic, spec[1]);
-        graphic.endFill();
-        textures[color] = graphic.generateTexture();
-    }
-
-    // Add three children
-    for (color in textures) {
-        var sprite = new PIXI.Sprite(textures[color]);
-        sprite.id = color;
-        sprite.interactive = true;
-        sprite.on('click', onChildClick);
-        container.addChild(sprite);
-    }
-
-    (function animate() {
-        renderer.render(container);
-        requestAnimationFrame(animate);
-    })();
-</script>
+<!--<canvas id="scene-box"></canvas>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
+<script src="js/pixi-layers.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/store.js"></script>
+<script src="js/model.js"></script>
+<script src="js/template.js"></script>
+<script src="js/view.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

@@ -20,24 +20,23 @@
         <script src="js/view.js"></script>
         <script src="js/controller.js"></script>
         <script src="js/app.js"></script>
-    <script>
-        PIXI.interaction.InteractionManager.prototype.dispatchEvent = function (displayObject, eventString, eventData)
-        {
-            eventData.target = displayObject;
-            eventData.type = eventString;
-
-            var bubbleTarget = displayObject;
-            while (bubbleTarget && !eventData.stopped)
+        <script>
+            PIXI.interaction.InteractionManager.prototype.dispatchEvent = function (displayObject, eventString, eventData)
             {
-                bubbleTarget.emit(eventString, eventData);
-                if (bubbleTarget[eventString])
+                eventData.target = displayObject;
+                eventData.type = eventString;
+    
+                var bubbleTarget = displayObject;
+                while (bubbleTarget && !eventData.stopped)
                 {
-                    bubbleTarget[eventString](eventData);
+                    bubbleTarget.emit(eventString, eventData);
+                    if (bubbleTarget[eventString])
+                    {
+                        bubbleTarget[eventString](eventData);
+                    }
+                    bubbleTarget = bubbleTarget.parent;
                 }
-                bubbleTarget = bubbleTarget.parent;
-            }
-        };
-//        PIXI.interaction.InteractionManager.prototype.dispatchEvent();
-    </script>
+            };
+        </script>
     </body>
 </html>
