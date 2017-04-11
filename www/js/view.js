@@ -61,7 +61,8 @@
                 e.stopPropagation();
             } else {
                 console.log("container clicked");
-                this.addFigure(e.data.originalEvent.clientX, e.data.originalEvent.clientY);
+                console.log(e.data);
+                this.addFigure(e.data.global.x, e.data.global.y);
             }
         });
 
@@ -95,13 +96,13 @@
         var circle = new PIXI.Graphics(),
             radius = Math.floor(Math.random() * (this.renderer.height/8 - 20)) + 20,
             posX = posX || Math.floor(Math.random() * (this.renderer.width - 1)) + 1,
-            posY = posY || 0,
+            posY = posY || Math.random() * (-1)*((200 - 1)) + 1,
             sqr = Math.PI * Math.pow(radius, 2);
 
         circle.vx = 0;
         circle.vy = 100.0 / 60.0;
 
-        circle.beginFill(0xFF3300);
+        circle.beginFill(this.getRandomColor());
         circle.lineStyle(4, 0xffd900, 1);
         circle.drawCircle(posX, posY, radius);
 
@@ -117,6 +118,15 @@
         this.container.addChild(circle);
         this.updateStats("plus", sqr);
 
+    };
+
+    View.prototype.getRandomColor = function() {
+        var letters = '0123456789ABCDEF';
+        var color = '0x';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     };
 
 

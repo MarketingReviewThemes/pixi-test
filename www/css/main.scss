@@ -7,6 +7,7 @@ body {
     padding: 0;
     color: $text-color;
     background: $body-color;
+    padding: 20px 40px;
 }
 * {
     box-sizing: border-box;
@@ -28,21 +29,24 @@ button {
     }
 }
 #stat-box {
-    padding: 20px 0 0 20px;
+    padding: 20px 0 20px 20px;
 }
 #scene-box {
     border: 2px dashed $text-color;
-    margin: 20px;
+}
+.controls {
+    width: 800px;
+    clear: both;
 }
 #quantity {
     float: left;
     width: 50%;
-    padding: 0 20px;
+    padding: 20px;
 }
 #gravity {
     float: right;
     width: 50%;
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .screen {
