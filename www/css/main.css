@@ -30,12 +30,11 @@ button {
 
 #quantity {
   float: left;
-  width: 50%;
+  width: 400px;
   padding: 0 20px; }
 
 #gravity {
-  float: right;
-  width: 50%;
+  float: left;
   padding: 0 20px; }
 
 .screen {
