@@ -2,16 +2,16 @@
 <html lang="en" data-framework="javascript">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
+        <title>PIXI game</title>
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
 
         <div id="stat-box">
-            <label>Quantity</label>
-            <span class="counterValue"></span>
-            <label>Square</label>
-            <span class="squareValue"></span>
+            <label>Quantity:</label>
+            <span class="counterValue screen"></span>
+            <label>Square:</label>
+            <span class="squareValue screen"></span>
         </div>
 
         <canvas id="scene-box"></canvas>
@@ -20,13 +20,13 @@
             <label>Quantity per second: </label>
             <button type="button" class="minusQuantity"><</button>
             <button type="button" class="plusQuantity">></button>
-            <span id="quantityValue"></span>
+            <span id="quantityValue" class="screen"></span>
         </div>
         <div id="gravity">
             <label>Gravity: </label>
             <button type="button" class="minusGravity"><</button>
             <button type="button" class="plusGravity">></button>
-            <span id="gravityValue"></span>
+            <span id="gravityValue" class="screen"></span>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
         <script src="js/helpers.js"></script>

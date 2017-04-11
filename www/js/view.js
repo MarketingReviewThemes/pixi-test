@@ -4,7 +4,7 @@
     'use strict';
 
     var WIDTH = 800,
-        HEIGHT = 600,
+        HEIGHT = 500,
         QUANTITY = 1,
         GRAVITY = 100.0,
         SQUARE = 0,
@@ -67,7 +67,7 @@
 
         //Rectangle for make container with rectangle size and possible to have event on click with bubbling
         var rectangle = new PIXI.Graphics();
-        rectangle.beginFill(0xFFFFFF);
+        rectangle.beginFill(0x000000);
         rectangle.drawRect(0, 0, WIDTH, HEIGHT);
         this.container.addChild(rectangle);
 
@@ -93,7 +93,7 @@
 
     View.prototype.addFigure = function(posX, posY) {
         var circle = new PIXI.Graphics(),
-            radius = Math.floor(Math.random() * (this.renderer.height/8 - 10)) + 10,
+            radius = Math.floor(Math.random() * (this.renderer.height/8 - 20)) + 20,
             posX = posX || Math.floor(Math.random() * (this.renderer.width - 1)) + 1,
             posY = posY || 0,
             sqr = Math.PI * Math.pow(radius, 2);

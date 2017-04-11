@@ -1,7 +1,52 @@
 body {
   margin: 0;
   padding: 0;
-  color: #FFF;
+  color: #ff9a22;
   background: #000; }
+
+* {
+  box-sizing: border-box; }
+
+button {
+  border-radius: 10px;
+  line-height: 30px;
+  width: 40px;
+  border: none;
+  font-size: 20px;
+  background: #d2691e;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all; }
+  button:hover {
+    background: #ff9a22; }
+
+#stat-box {
+  padding: 20px 0 0 20px; }
+
+#scene-box {
+  border: 2px dashed #ff9a22;
+  margin: 20px; }
+
+#quantity {
+  float: left;
+  width: 50%;
+  padding: 0 20px; }
+
+#gravity {
+  float: right;
+  width: 50%;
+  padding: 0 20px; }
+
+.screen {
+  display: inline-block;
+  border-radius: 10px;
+  line-height: 30px;
+  border: none;
+  font-size: 20px;
+  background: #2c8bb4;
+  color: #FFF;
+  margin: 0 10px;
+  padding: 0 10px; }
 
 /*# sourceMappingURL=main.css.map */
