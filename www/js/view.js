@@ -5,18 +5,28 @@
 
     var WIDTH = 800,
         HEIGHT = 600,
+        QUANTITY = 1,
         GRAVITY = 100.0,
         SQUARE = 0,
-        COUNTER = 0,
-        QUANTITY = 1,
-        counterValue = qs(".counterValue"),
-        squareValue = qs(".squareValue"),
-        gravityValue = qs("#gravityValue"),
-        quantityValue = qs("#quantityValue");
+        COUNTER = 0;
 
     function View() {
-        this.createAppContainer();
 
+        this.$counterValue = qs(".counterValue");
+        this.$squareValue = qs(".squareValue");
+        this.$gravityValue = qs("#gravityValue");
+        this.$quantityValue = qs("#quantityValue");
+
+    }
+    View.prototype.pixiApp = new PIXI.Application(WIDTH, HEIGHT);
+
+
+    View.prototype.renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, {
+        view: qs('#scene-box')
+    });
+    View.prototype.container = new PIXI.Container();
+    
+    View.prototype.InitEvents = function() {
 
         qs('#gravity .minusGravity').addEventListener("click", () => {
             this.updateGravity("minus");
@@ -32,51 +42,30 @@
         qs(".plusQuantity").addEventListener("click", () => {
             this.updateQuantity("plus");
         });
-        quantityValue.innerHTML = QUANTITY;
-        gravityValue.innerHTML = GRAVITY;
+        this.$quantityValue.innerHTML = QUANTITY;
+        this.$gravityValue.innerHTML = GRAVITY;
+
+    };
 
 
 
-        setInterval(() => {
-            for(var i =0; i < QUANTITY; i++) {
-                this.addFigure();
-            }
-
-        }, 1000);
-
-
-        this.pixiApp.ticker.add((delta) => {
-            this.container.children.forEach(this.updatePosition);
-        });
-    }
-
-
-    View.prototype.pixiApp = new PIXI.Application(WIDTH, HEIGHT);
-    
-    View.prototype.renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, {
-        view: qs('#scene-box')
-    });
-    View.prototype.container = new PIXI.Container();
-
-
-    View.prototype.createAppContainer = function() {
+    View.prototype.Render = function() {
 
         this.container.interactive = true;
         this.container.buttonMode = true;
         this.container.id = 'container';
 
         this.container.on('pointerdown', (e) => {
-
             if(e.target.id == "circle") {
-                // console.log("Circle clicked");
+                console.log("Circle clicked");
                 e.stopPropagation();
             } else {
-                // console.log("container clicked");
+                console.log("container clicked");
                 this.addFigure(e.data.originalEvent.clientX, e.data.originalEvent.clientY);
             }
         });
 
-        //Rectangle for make container with rectangle size
+        //Rectangle for make container with rectangle size and possible to have event on click with bubbling
         var rectangle = new PIXI.Graphics();
         rectangle.beginFill(0xFFFFFF);
         rectangle.drawRect(0, 0, WIDTH, HEIGHT);
@@ -87,6 +76,18 @@
             that.renderer.render(that.container);
             requestAnimationFrame(animate);
         })();
+
+        // Add figures to the scene each 1sec
+        setInterval(() => {
+            for(var i =0; i < QUANTITY; i++) {
+                this.addFigure();
+            }
+        }, 1000);
+
+        //Update position of the figures according ticker
+        this.pixiApp.ticker.add((delta) => {
+            this.container.children.forEach(this.updatePosition);
+        });
     };
 
 
@@ -132,7 +133,7 @@
         } else if (way == "plus") {
             GRAVITY += 50;
         }
-        gravityValue.innerHTML = GRAVITY;
+        this.$gravityValue.innerHTML = GRAVITY;
     };
 
 
@@ -142,7 +143,7 @@
         } else if (way == "plus") {
             QUANTITY += 1;
         }
-        quantityValue.innerHTML = QUANTITY;
+        this.$quantityValue.innerHTML = QUANTITY;
     };
 
 
@@ -154,8 +155,8 @@
             COUNTER += 1;
             SQUARE += sqr;
         }
-        counterValue.innerHTML = COUNTER;
-        squareValue.innerHTML = parseInt(SQUARE);
+        this.$counterValue.innerHTML = COUNTER;
+        this.$squareValue.innerHTML = parseInt(SQUARE);
     };
 
     // Export to window

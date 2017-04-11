@@ -12,10 +12,16 @@
 		var self = this;
 		self.model = model;
 		self.view = view;
-
-
-
+		self.view.InitEvents();
+		self.view.Render();
     }
+
+    // Controller.prototype.showAll = function () {
+    //     var self = this;
+    //     self.model.read(function (data) {
+    //         self.view.Render();
+    //     });
+    // };
 
 	/**
 	 * Loads and initialises the view
