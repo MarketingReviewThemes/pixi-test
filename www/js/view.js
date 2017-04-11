@@ -77,9 +77,9 @@
             requestAnimationFrame(animate);
         })();
 
-        // Add figures to the scene each 1sec
+        // Add figures to the scene each 1s
         setInterval(() => {
-            for(var i =0; i < QUANTITY; i++) {
+            for(var i = 0; i < QUANTITY; i++) {
                 this.addFigure();
             }
         }, 1000);

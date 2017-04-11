@@ -1,5 +1,5 @@
-# Vanilla JavaScript TodoMVC Example
+# Simple based on PIXI.js game example
 
-> JavaScript® (often shortened to JS) is a lightweight, interpreted, object-oriented language with first-class functions, most known as the scripting language for Web pages, but used in many non-browser environments as well such as node.js or Apache CouchDB.
+> Game developed used only HTML/CSS/JS/ PIXI.js taked from CDN. So you don't need to install anything. Just run index.html in your favorite web browser. And have an internet connection on your local machine. Or try link from test server below
 
-> _[JavaScript - developer.mozilla.org](http://developer.mozilla.org/en-US/docs/JavaScript)
+> [Bubbles pixi.js game](http://renovaciodesign.com/pixi-game/)
